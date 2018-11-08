@@ -37,7 +37,7 @@ function generateCacheKey(url, useQueryParamsInCacheKey = true) {
     const fileType = parts.length > 1 ? _.toLower(parts.pop()) : '';
     const type = defaultImageTypes.includes(fileType) ? fileType : 'jpg';
 
-    const cacheable = filePath + fileName + type + getQueryForCacheKey(parsedUrl, useQueryParamsInCacheKey);
+    const cacheable = fileName + type + getQueryForCacheKey(parsedUrl, useQueryParamsInCacheKey);
     return SHA1(cacheable) + '.' + type;
 }
 
@@ -65,7 +65,7 @@ module.exports = {
         const hostCachePath = getHostCachePathComponent(url);
         const cacheKey = generateCacheKey(url);
 
-        return `${cacheLocation}/${hostCachePath}/${cacheKey}`;
+        return `${cacheLocation}/${cacheKey}`;
     },
 
     /**
@@ -78,7 +78,7 @@ module.exports = {
         const hostCachePath = getHostCachePathComponent(url);
         const cacheKey = generateCacheKey(url);
 
-        return `${hostCachePath}/${cacheKey}`;
+        return `${cacheKey}`;
     },
 
 
